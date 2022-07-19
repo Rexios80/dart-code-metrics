@@ -7,16 +7,10 @@ void firstFunction(
 }
 
 void secondFunction(String arg1) {
-  firstFunction(
-    '',
-    '',
-    '',
-  );
+  firstFunction('', '', '');
 }
 
 void thirdFunction(String arg1, void Function() callback) {}
-
-void forthFunction(void Function() callback) {}
 
 class TestClass {
   void firstMethod(
@@ -37,25 +31,11 @@ class TestClass {
     thirdFunction('', () {
       return;
     });
-
-    forthFunction(() {
-      return;
-    });
   }
 
-  void thirdMethod(
-    String arg1,
-  ) {
-    firstMethod(
-      arg1,
-      '',
-      '',
-    );
-    firstFunction(
-      arg1,
-      '',
-      '',
-    );
+  void thirdMethod(String arg1) {
+    firstMethod(arg1, '', '');
+    firstFunction(arg1, '', '');
   }
 }
 
@@ -68,11 +48,7 @@ enum FirstEnum {
   sixthItem,
 }
 
-enum SecondEnum {
-  firstItem,
-}
-
-enum ThirdEnum { firstItem }
+enum SecondEnum { firstItem }
 
 class FirstClass {
   final num firstField;
@@ -89,21 +65,12 @@ class FirstClass {
 }
 
 const firstInstance = FirstClass(0, 0, 0, 0);
-const secondInstance = FirstClass(
-  0,
-  0,
-  0,
-  0,
-);
 
-final firstArray = ['some string'];
+final firstArray = ['some string that somehow makes this line exactly 80 char'];
 final secondArray = [
   'some string',
   'some other string',
   'and another string for length exceed',
-];
-final thirdArray = [
-  'some string',
 ];
 
 final firstSet = {'some string'};
@@ -112,16 +79,10 @@ final secondSet = {
   'some other string',
   'and another string for length exceed',
 };
-final thirdSet = {
-  'some string',
-};
 
 final firstMap = {'some string': 'some string'};
 final secondMap = {
   'some string': 'and another string for length exceed',
   'and another string for length exceed':
       'and another string for length exceed',
-};
-final thirdMap = {
-  'some string': 'some string',
 };

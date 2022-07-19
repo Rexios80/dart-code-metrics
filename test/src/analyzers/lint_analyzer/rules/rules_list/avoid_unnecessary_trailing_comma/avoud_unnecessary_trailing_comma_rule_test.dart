@@ -30,56 +30,12 @@ void main() {
 
       RuleTestHelper.verifyIssues(
         issues: issues,
-        startLines: [3, 9, 13, 18, 24, 28, 49, 58, 64, 70],
-        startColumns: [50, 7, 5, 52, 9, 8, 59, 3, 3, 3],
-        locationTexts: [
-          'String thirdArgument',
-          "'and another string for length exceed'",
-          'String arg3',
-          'String thirdArgument',
-          "'and another string for length exceed'",
-          "'some other string'",
-          'this.forthField',
-          "'and another string for length exceed'",
-          "'and another string for length exceed'",
-          "'and another string for length exceed': 'and another string for length exceed'",
-        ],
-        messages: [
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-        ],
-        replacementComments: [
-          'Remove trailing comma.',
-          'Remove trailing comma.',
-          'Remove trailing comma.',
-          'Remove trailing comma.',
-          'Remove trailing comma.',
-          'Remove trailing comma.',
-          'Remove trailing comma.',
-          'Remove trailing comma.',
-          'Remove trailing comma.',
-          'Remove trailing comma.',
-        ],
-        replacements: [
-          'String thirdArgument,',
-          "'and another string for length exceed',",
-          'String arg3,',
-          'String thirdArgument,',
-          "'and another string for length exceed',",
-          "'some other string',",
-          'this.forthField,',
-          "'and another string for length exceed',",
-          "'and another string for length exceed',",
-          "'and another string for length exceed': 'and another string for length exceed',",
-        ],
+        startLines: [4, 13, 20, 27, 36, 44, 64, 74, 80, 85],
+        startColumns: [24, 24, 31, 26, 26, 8, 20, 22, 22, 56],
+        locationTexts: List.filled(10, ','),
+        messages: List.filled(10, 'Avoid unnecessary trailing comma.'),
+        replacementComments: List.filled(10, 'Remove trailing comma.'),
+        replacements: List.filled(10, ''),
       );
     });
 
@@ -90,42 +46,34 @@ void main() {
       RuleTestHelper.verifyNoIssues(issues);
     });
 
-    test('with custom config reports about found issues', () async {
-      final unit = await RuleTestHelper.resolveFromFile(_correctExamplePath);
+    test('with custom break-on config reports no issues', () async {
+      final unit = await RuleTestHelper.resolveFromFile(_incorrectExamplePath);
       final config = {'break-on': 1};
+      final issues = AvoidUnnecessaryTrailingCommaRule(config).check(unit);
+
+      RuleTestHelper.verifyNoIssues(issues);
+    });
+
+    test('with custom line-length config reports no issues', () async {
+      final unit = await RuleTestHelper.resolveFromFile(_incorrectExamplePath);
+      final config = {'line-length': 10};
+      final issues = AvoidUnnecessaryTrailingCommaRule(config).check(unit);
+
+      RuleTestHelper.verifyNoIssues(issues);
+    });
+
+    test('with custom line-length config reports about found issues', () async {
+      final unit = await RuleTestHelper.resolveFromFile(_correctExamplePath);
+      final config = {'line-length': 240};
 
       final issues = AvoidUnnecessaryTrailingCommaRule(config).check(unit);
 
       RuleTestHelper.verifyIssues(
         issues: issues,
-        startLines: [9, 17, 19, 37, 41, 91, 99, 109, 119],
-        startColumns: [21, 33, 20, 23, 19, 43, 21, 19, 19],
-        locationTexts: [
-          'String arg1',
-          'void Function() callback',
-          'void Function() callback',
-          '() {\n'
-              '      return;\n'
-              '    }',
-          '() {\n'
-              '      return;\n'
-              '    }',
-          '0',
-          '\'some string\'',
-          '\'some string\'',
-          '\'some string\': \'some string\'',
-        ],
-        messages: [
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-          'Avoid unnecessary trailing comma.',
-        ],
+        startLines: [4, 19, 28, 63, 73, 80, 87],
+        startColumns: [23, 25, 45, 20, 41, 41, 45],
+        locationTexts: List.filled(7, ','),
+        messages: List.filled(7, 'Avoid unnecessary trailing comma.'),
       );
     });
   });

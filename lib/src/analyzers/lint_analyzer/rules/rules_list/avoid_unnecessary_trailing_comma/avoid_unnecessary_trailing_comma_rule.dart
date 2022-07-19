@@ -44,11 +44,11 @@ class AvoidUnnecessaryTrailingCommaRule extends CommonRule {
         .map(
           (node) => createIssue(
             rule: this,
-            location: nodeLocation(node: node, source: source),
+            location: nodeLocation(node: node.endToken.next!, source: source),
             message: _warningMessage,
-            replacement: Replacement(
+            replacement: const Replacement(
               comment: _correctionMessage,
-              replacement: source.content.substring(node.offset, node.end - 1),
+              replacement: '',
             ),
           ),
         )
