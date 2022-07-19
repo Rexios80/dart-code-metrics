@@ -1,5 +1,5 @@
 import 'package:dart_code_metrics/src/analyzers/lint_analyzer/models/severity.dart';
-import 'package:dart_code_metrics/src/analyzers/lint_analyzer/rules/rules_list/avoid_unnecessary_trailing_comma/avoid_unnecessary_trailing_comma_rule.dart';
+import 'package:dart_code_metrics/src/analyzers/lint_analyzer/rules/rules_list/avoid_unnecessary_trailing_commas/avoid_unnecessary_trailing_commas_rule.dart';
 import 'package:test/test.dart';
 
 import '../../../../../helpers/rule_test_helper.dart';
@@ -12,21 +12,21 @@ const _incorrectExamplePath =
     'avoid_unnecessary_trailing_comma/examples/incorrect_example.dart';
 
 void main() {
-  group('AvoidUnnecessaryTrailingCommaRule', () {
+  group('AvoidUnnecessaryTrailingCommasRule', () {
     test('initialization', () async {
       final unit = await RuleTestHelper.resolveFromFile(_correctExamplePath);
-      final issues = AvoidUnnecessaryTrailingCommaRule().check(unit);
+      final issues = AvoidUnnecessaryTrailingCommasRule().check(unit);
 
       RuleTestHelper.verifyInitialization(
         issues: issues,
-        ruleId: 'avoid-unnecessary-trailing-comma',
+        ruleId: 'avoid-unnecessary-trailing-commas',
         severity: Severity.warning,
       );
     });
 
     test('with default config reports about found issues', () async {
       final unit = await RuleTestHelper.resolveFromFile(_incorrectExamplePath);
-      final issues = AvoidUnnecessaryTrailingCommaRule().check(unit);
+      final issues = AvoidUnnecessaryTrailingCommasRule().check(unit);
 
       RuleTestHelper.verifyIssues(
         issues: issues,
@@ -41,7 +41,7 @@ void main() {
 
     test('with default config reports no issues', () async {
       final unit = await RuleTestHelper.resolveFromFile(_correctExamplePath);
-      final issues = AvoidUnnecessaryTrailingCommaRule().check(unit);
+      final issues = AvoidUnnecessaryTrailingCommasRule().check(unit);
 
       RuleTestHelper.verifyNoIssues(issues);
     });
@@ -49,7 +49,7 @@ void main() {
     test('with custom break-on config reports no issues', () async {
       final unit = await RuleTestHelper.resolveFromFile(_incorrectExamplePath);
       final config = {'break-on': 1};
-      final issues = AvoidUnnecessaryTrailingCommaRule(config).check(unit);
+      final issues = AvoidUnnecessaryTrailingCommasRule(config).check(unit);
 
       RuleTestHelper.verifyNoIssues(issues);
     });
@@ -57,7 +57,7 @@ void main() {
     test('with custom line-length config reports no issues', () async {
       final unit = await RuleTestHelper.resolveFromFile(_incorrectExamplePath);
       final config = {'line-length': 10};
-      final issues = AvoidUnnecessaryTrailingCommaRule(config).check(unit);
+      final issues = AvoidUnnecessaryTrailingCommasRule(config).check(unit);
 
       RuleTestHelper.verifyNoIssues(issues);
     });
@@ -66,7 +66,7 @@ void main() {
       final unit = await RuleTestHelper.resolveFromFile(_correctExamplePath);
       final config = {'line-length': 240};
 
-      final issues = AvoidUnnecessaryTrailingCommaRule(config).check(unit);
+      final issues = AvoidUnnecessaryTrailingCommasRule(config).check(unit);
 
       RuleTestHelper.verifyIssues(
         issues: issues,

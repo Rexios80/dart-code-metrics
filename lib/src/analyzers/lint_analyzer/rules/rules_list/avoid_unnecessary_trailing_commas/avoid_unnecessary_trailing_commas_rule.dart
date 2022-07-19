@@ -16,16 +16,16 @@ import '../../rule_utils.dart';
 part 'config_parser.dart';
 part 'visitor.dart';
 
-class AvoidUnnecessaryTrailingCommaRule extends CommonRule {
-  static const ruleId = 'avoid-unnecessary-trailing-comma';
+class AvoidUnnecessaryTrailingCommasRule extends CommonRule {
+  static const ruleId = 'avoid-unnecessary-trailing-commas';
 
-  static const _warningMessage = 'Avoid unnecessary trailing comma.';
+  static const _warningMessage = 'Avoid unnecessary trailing commas.';
   static const _correctionMessage = 'Remove trailing comma.';
 
   final int? _itemsBreakpoint;
   final int _lineLength;
 
-  AvoidUnnecessaryTrailingCommaRule([Map<String, Object> config = const {}])
+  AvoidUnnecessaryTrailingCommasRule([Map<String, Object> config = const {}])
       : _itemsBreakpoint = _ConfigParser.parseBreakpoint(config),
         _lineLength = _ConfigParser.parseLineLength(config),
         super(
